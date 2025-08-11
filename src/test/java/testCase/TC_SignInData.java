@@ -22,8 +22,8 @@ public class TC_SignInData {
 
     @Test
     public void verify_login_and_signout() {
-        String email = "admin012@gmail.com"; // valid
-        String password = "Test@12344"; // valid
+        String email = "admin012@gmail.com"; 
+        String password = "Test@12344"; 
 
         boolean loginSuccess = loginPage.login(email, password);
         Assert.assertTrue(loginSuccess, "Login failed — Welcome message not displayed!");
