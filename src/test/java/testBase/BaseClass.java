@@ -24,21 +24,19 @@ import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 
 public class BaseClass {
-	public static WebDriver driver;  // Made static to ensure shared instance if needed
+	public static WebDriver driver;  
     public Logger logger = LogManager.getLogger(getClass());
     public Properties p;
 
     @Parameters({"os", "browser"})
     @BeforeClass
-    public void setup(@Optional("windows") String os, @Optional("chrome") String br) throws IOException {
-        // Load config.properties file
+    public void setup(@Optional("windows") String os, @Optional("chrome") String br) throws IOException 
     	FileInputStream fis = new FileInputStream("resources/config.properties");
 
 
         p = new Properties();
         p.load(fis);
 
-        // Browser setup
         switch (br.toLowerCase()) {
             case "chrome":driver = new ChromeDriver();break;
             case "edge": driver = new EdgeDriver();break;
@@ -49,7 +47,7 @@ public class BaseClass {
 
         driver.manage().deleteAllCookies();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        driver.get(p.getProperty("appURL1")); // Read URL from properties
+        driver.get(p.getProperty("appURL1"));
         driver.manage().window().maximize();
     }
 
