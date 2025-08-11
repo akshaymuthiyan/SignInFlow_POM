@@ -11,15 +11,15 @@ public class LoginPage {
     private WebDriver driver;
     private WebDriverWait wait;
 
-    // Locators
+   
     private By lnkSignIn = By.linkText("Sign In");
     private By txtEmailAddress = By.id("email");
     private By txtPassword = By.id("pass");
-    private By btnSignIn = By.id("send2"); // Magento default
+    private By btnSignIn = By.id("send2"); 
     private By welcomeDropdown = By.xpath("//button[@data-action='customer-menu-toggle']");
     private By lnkSignOut = By.linkText("Sign Out");
 
-    // Success & error checks
+   
     private By headerWelcome = By.xpath("//span[contains(text(),'Welcome,')]");
     private By errorMessage = By.cssSelector(".message-error");
 
@@ -28,7 +28,7 @@ public class LoginPage {
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(15));
     }
 
-    // Open login form
+
     public void openLoginForm() {
         wait.until(ExpectedConditions.elementToBeClickable(lnkSignIn)).click();
     }
@@ -51,15 +51,15 @@ public class LoginPage {
 
 
     public void clickSignOutLink() {
-        // Step 1: Click Welcome dropdown
+      
         WebElement welcomeDrop = wait.until(ExpectedConditions.elementToBeClickable(welcomeDropdown));
         welcomeDrop.click();
 
-        // Step 2: Wait for Sign Out link in dropdown to be visible
+  
         By signOutLocator = By.xpath("//div[@aria-hidden='false']//a[normalize-space()='Sign Out']");
         WebElement signOutLink = wait.until(ExpectedConditions.elementToBeClickable(signOutLocator));
 
-        // Step 3: Click Sign Out
+       
         signOutLink.click();
     }
 
@@ -76,7 +76,7 @@ public class LoginPage {
                     ExpectedConditions.visibilityOfElementLocated(errorMessage)
             ));
 
-            // Return true if welcome message is present
+           
             return driver.findElements(headerWelcome).size() > 0;
         } catch (Exception e) {
             return false;
