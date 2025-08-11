@@ -64,7 +64,7 @@ public class ExcelUtility {
 		DataFormatter formatter = new DataFormatter();
 		String data;
 		try {
-			data=formatter.formatCellValue(cell);	//return the formatted value of a cell as a string regardless
+			data=formatter.formatCellValue(cell);	
 		}
 		catch(Exception e)
 		{
@@ -78,7 +78,7 @@ public class ExcelUtility {
 	public void setCellData(String sheetName,int rownum,int colnum,String data) throws IOException
 	{
 		File xfile=new File(path);
-		if(!xfile.exists())	//if file not exists then create new file
+		if(!xfile.exists())	
 		{
 			workbook=new XSSFWorkbook();
 			fo=new FileOutputStream(path);
@@ -88,12 +88,12 @@ public class ExcelUtility {
 		fi=new FileInputStream(path);
 		workbook=new XSSFWorkbook(fi);
 
-		if(workbook.getSheetIndex(sheetName)==-1) { //If sheet not exists then create new sheet
+		if(workbook.getSheetIndex(sheetName)==-1) { 
 			workbook.createSheet(sheetName);
 		}
 		sheet=workbook.getSheet(sheetName);
 
-		if(sheet.getRow(rownum)==null) { //if row not exists then create new row
+		if(sheet.getRow(rownum)==null) { 
 			sheet.createRow(rownum);
 		}
 		row=sheet.getRow(rownum);
@@ -101,27 +101,6 @@ public class ExcelUtility {
 		cell=row.createCell(colnum);
 		cell.setCellValue(data);
 		fo=new FileOutputStream(path);
-		workbook.write(fo);
-		workbook.close();
-		fi.close();
-		fo.close();
-	}
-
-	public void fillGreenColor(String sheetName,int rownum, int colnum) throws IOException
-	{
-		fi=new FileInputStream(path);
-		workbook=new XSSFWorkbook(fi);
-		sheet=workbook.getSheet(sheetName);
-
-		row=sheet.getRow(rownum);
-		cell=row.getCell(colnum);
-
-		style=workbook.createCellStyle();
-
-		style.setFillBackgroundColor(IndexedColors.GREEN.getIndex());
-		style.setFillPattern(FillPatternType.SOLID_FOREGROUND);
-
-		cell.setCellStyle(style);
 		workbook.write(fo);
 		workbook.close();
 		fi.close();
